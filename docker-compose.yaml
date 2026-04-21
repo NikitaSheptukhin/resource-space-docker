@@ -5,6 +5,8 @@ services:
     restart: unless-stopped
     depends_on:
       - mariadb
+    env_file:
+      - db.env
     user: '0:33' # Root and www-data group, non root will be assigned later
     volumes:
       - filestore:/var/www/html/filestore
