@@ -58,10 +58,11 @@ WORKDIR /var/www/html
 RUN rm -f index.html \
  && svn co -q https://svn.resourcespace.com/svn/rs/releases/10.7 . \
  && mkdir -p filestore \
- && chmod 777 filestore \
- && chmod -R 777 include/
+ && chown -R root:www-data filestore \
+ && chmod 775 filestore \
+ && chown -R root:www-data include/ \
+ && chmod -R 775 include/
  
-
 # Copy custom entrypoint script
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod 755 /entrypoint.sh
