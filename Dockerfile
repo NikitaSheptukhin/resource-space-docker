@@ -4,6 +4,8 @@ LABEL org.opencontainers.image.authors="Montala Ltd"
 
 ENV DEBIAN_FRONTEND="noninteractive"
 
+COPY LICENSE /var/www/html/license.txt
+
 RUN apt-get update && apt-get install -y \
     vim \
     imagemagick \
