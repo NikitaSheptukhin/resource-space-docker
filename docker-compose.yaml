@@ -8,11 +8,13 @@ services:
     volumes:
       - filestore:/var/www/html/filestore
       - ./config.php:/var/www/html/include/config.php
+      - ./000-default.conf:/etc/apache2/sites-enabled/000-default.conf
+      - ./apache2.conf:/etc/apache2/apache2.conf
     networks:
       - frontend
       - backend
     ports:
-      - "80:80"
+      - '80:80'
 
   mariadb:
     image: mariadb
