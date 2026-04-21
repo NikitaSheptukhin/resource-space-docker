@@ -50,7 +50,8 @@ RUN printf '<Directory /var/www/>\n\
 </Directory>\n'\
 >> /etc/apache2/sites-enabled/000-default.conf
 
-ADD cronjob /etc/cron.daily/resourcespace
+COPY cronjob /etc/cron.daily/resourcespace
+RUN chmod +x /etc/cron.daily/resourcespace
 
 WORKDIR /var/www/html
 
