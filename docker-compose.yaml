@@ -5,9 +5,10 @@ services:
     restart: unless-stopped
     depends_on:
       - mariadb
+    user: '0:33' # Root and www-data group, non root will be assigned later
     volumes:
       - filestore:/var/www/html/filestore
-      - ./config.php:/var/www/html/include/config.php
+      - ./config.php:/tmp/config.php
       - ./000-default.conf:/etc/apache2/sites-enabled/000-default.conf
       - ./apache2.conf:/etc/apache2/apache2.conf
     networks:
