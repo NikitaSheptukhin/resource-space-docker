@@ -51,7 +51,7 @@ RUN printf '<Directory /var/www/>\n\
 >> /etc/apache2/sites-enabled/000-default.conf
 
 COPY cronjob /etc/cron.daily/resourcespace
-RUN chmod +x /etc/cron.daily/resourcespace
+RUN chmod 755 /etc/cron.daily/resourcespace
 
 WORKDIR /var/www/html
 
@@ -64,7 +64,7 @@ RUN rm -f index.html \
 
 # Copy custom entrypoint script
 COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+RUN chmod 755 /entrypoint.sh
 
 # Start both cron and Apache
 ENTRYPOINT ["/entrypoint.sh"]
