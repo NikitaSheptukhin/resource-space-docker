@@ -67,4 +67,4 @@ COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 # Start both cron and Apache
-CMD ["/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
