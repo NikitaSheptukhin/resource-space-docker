@@ -8,6 +8,7 @@ COPY LICENSE /var/www/html/license.txt
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     vim \
+    curl \
     imagemagick \
     apache2 \
     subversion \
@@ -26,6 +27,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     php-intl \
     php-mysqlnd \
     php-mbstring \
+    php-xml \
     php-zip \
     libapache2-mod-php \
     ffmpeg \
@@ -60,6 +62,9 @@ WORKDIR /var/www/html
 RUN rm -f index.html \
  && svn co -q https://svn.resourcespace.com/svn/rs/releases/10.7 . \
  && rm -rf .svn \
+ && sed -i 's|SlideshowLoadImage.src = SlideshowImages\[SlideshowCurrent\];|if (!SlideshowImages[SlideshowCurrent]) { return false; }\
+     SlideshowLoadImage.src = SlideshowImages[SlideshowCurrent];|' /var/www/html/js/slideshow_big.js \
+ && sed -i 's|jQuery(".slide-active").css("background-image", "url(" + SlideshowImages\[SlideshowCurrent\] + ")");|if (SlideshowImages.length === 0) { return false; } if (!SlideshowImages[SlideshowCurrent]) { return false; } jQuery(".slide-active").css("background-image", "url(" + SlideshowImages[SlideshowCurrent] + ")");|' /var/www/html/js/slideshow_big.js \
  && mkdir -p filestore \
  && chown -R root:www-data filestore \
  && chmod 775 filestore \
