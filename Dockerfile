@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND="noninteractive"
 
 COPY LICENSE /var/www/html/license.txt
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     vim \
     imagemagick \
     apache2 \
@@ -59,6 +59,7 @@ WORKDIR /var/www/html
 
 RUN rm -f index.html \
  && svn co -q https://svn.resourcespace.com/svn/rs/releases/10.7 . \
+ && rm -rf .svn \
  && mkdir -p filestore \
  && chown -R root:www-data filestore \
  && chmod 775 filestore \
