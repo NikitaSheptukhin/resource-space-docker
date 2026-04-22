@@ -1,6 +1,7 @@
 import hmac, hashlib, requests, os, getpass
 
-base_url = os.getenv("resourcespace_api_url")
+# base_url = os.environ.get("resourcespace_api_url")
+base_url = "http://10.172.18.178"
 
 def get_credentials() -> tuple[str, str]:
     """Prompt the user for their ResourceSpace credentials via the console."""
@@ -32,4 +33,3 @@ def sign_request(session_key: str, query_string: str) -> str:
 if __name__ == "__main__":
     username, password = get_credentials()
     session_key = login(username, password)
-    print(session_key)
