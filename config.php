@@ -26,7 +26,7 @@ $api_scramble_key = 'c0c7f6563b9dc69b6bcdccf5c8e83dca7e95fd62a34e3e8ad5c17e71a2e
 
 # Paths
 $defaultlanguage = '';
-$homeanim_folder = '';
+$homeanim_folder = 'gfx/homeanim';
 
 /*
 
