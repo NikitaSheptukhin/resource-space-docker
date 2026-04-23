@@ -1,24 +1,25 @@
-import requests, getpass, hashlib
+import getpass
+from pathlib import Path
 
-def get_credentials() -> tuple[str, str]:
-    username = input("ResourceSpace username: ").strip()
-    password = getpass.getpass("Password: ")
-    return username, password
+def _load_env() -> dict:
+    env_path = Path(__file__).parent.parent / ".env"
+    env = {}
+    if env_path.exists():
+        for line in env_path.read_text().splitlines():
+            line = line.strip()
+            if line and not line.startswith("#") and "=" in line:
+                k, _, v = line.partition("=")
+                env[k.strip()] = v.strip()
+    return env
 
-def login(base_url: str, api_scramble_key: str) -> tuple[str, str]:
-    """Returns (username, private_key). Verifies credentials then derives the API key."""
-    username, password = get_credentials()
+def login() -> tuple[str, str]:
+    """Returns (username, private_key). Reads from .env if populated, otherwise prompts."""
+    env = _load_env()
 
-    # Login bypasses signature checking server-side. param2 must be plain text —
-    # RS passes it directly to rs_password_verify().
-    query = f"function=login&param1={username}&param2={password}"
-    response = requests.get(f"{base_url}/api/?{query}&user={username}", timeout=15)
-    response.raise_for_status()
+    username = env.get("RS_USERNAME") or input("ResourceSpace username: ").strip()
+    private_key = env.get("RS_API_KEY") or getpass.getpass("API key (from your RS user profile): ")
 
-    result = response.text.strip().strip('"')
-    if not result or result.lower() == "false":
-        raise ValueError("Login failed: invalid credentials.")
+    if not username or not private_key:
+        raise ValueError("Username and API key are required.")
 
-    # Derives the API key the same way get_api_key() does in RS: sha256(username + api_scramble_key).
-    private_key = hashlib.sha256((username + api_scramble_key).encode()).hexdigest()
     return username, private_key

@@ -1,20 +1,23 @@
+import re
+from auth import login, _load_env
 from provisioner import provision_collection_space, teardown_collection_space
-from auth import login
-
-base_url = "http://10.172.18.178"
-api_scramble_key = "c0c7f6563b9dc69b6bcdccf5c8e83dca7e95fd62a34e3e8ad5c17e71a2ec2ede"
 
 if __name__ == "__main__":
-    username, private_key = login(base_url, api_scramble_key)
-    print(username)
-    print(private_key)
+    base_url = _load_env().get("RS_BASE_URL", "http://10.172.18.178")
+    username, private_key = login()
 
     # ── Provision a named collection space ───────────────────────────────────
+    while True:
+        name = input("Enter collection name (no spaces, letters/digits/underscores/hyphens only): ").strip()
+        if name and re.match(r'^[\w-]+$', name):
+            break
+        print("Invalid name. Use only letters, digits, underscores, or hyphens — no spaces.")
+
     result = provision_collection_space(
         base_url=base_url,
         username=username,
         private_key=private_key,
-        name="Biology_Dept",        # base name — no spaces recommended
+        name=name,
         public_collection=False,
     )
 
