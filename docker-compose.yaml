@@ -8,7 +8,7 @@ services:
     env_file:
       - db.env
     environment:
-      - RESOURCESPACE_HOST=${MACHINE_IP}
+      - RESOURCESPACE_HOST=${RESOURCESPACE_HOST:-}
     user: '0:33' # Root and www-data group, non root will be assigned later
     volumes:
       - filestore:/var/www/html/filestore
@@ -20,11 +20,11 @@ services:
       - frontend
       - backend
     ports:
-      - '80:80'
+      - '8000:80'
 
   mariadb:
     image: mariadb:12.3.1-ubi10-rc@sha256:91cb55e4889475692e096d337a93a11a7dd31c30251e2bbd91766f070e638a80
-    container_name: mariadb
+    container_name: mariadb_resourcespace
     restart: unless-stopped
     env_file:
       - db.env

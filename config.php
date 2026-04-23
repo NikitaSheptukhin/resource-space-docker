@@ -14,8 +14,7 @@ $mysql_password = 'rs_test_password';
 $mysql_db = 'resourcespace';
 
 # Base URL of the installation
-# Internal IP here gets overwritten with the sed in entrypoint.sh
-$baseurl = 'http://10.172.18.178';
+$baseurl = 'http://10.172.22.196:8000';
 
 # Email settings
 $email_notify = 'test@test.test';
@@ -26,7 +25,7 @@ $api_scramble_key = 'c0c7f6563b9dc69b6bcdccf5c8e83dca7e95fd62a34e3e8ad5c17e71a2e
 
 # Paths
 $defaultlanguage = '';
-$homeanim_folder = 'filestore/system/slideshow_f3ee506d6a68d2b';
+$homeanim_folder = 'gfx/homeanim';
 
 /*
 
