@@ -15,6 +15,7 @@ services:
       - ./config.php:/var/www/html/include/config.php
       - ./000-default.conf:/etc/apache2/sites-enabled/000-default.conf
       - ./apache2.conf:/etc/apache2/apache2.conf
+      - ./helperScript/rs_helper.php:/var/www/html/rs_helper/index.php
     networks:
       - frontend
       - backend
