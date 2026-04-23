@@ -10,3 +10,16 @@ Start ResourceSpace with the following command: `source start.sh`
 
 - Before building the Docker image, change the db.env file replacing the default "change-me" passwords to secure values.
 - When setting up ResourceSpace ensure you enter "mariadb" as the MySQL server instead of "localhost" and leave the "MySQL binary path" empty.
+
+# Default admin credentials
+
+On first startup, the automated setup creates an admin user with:
+
+- Username: `admin`
+- Password: `Adminpass1!`
+
+If setup falls back to admin bootstrap recovery, the admin password is set to:
+
+- Password: `RSadminAdminpass1!`
+
+For security, change the admin password immediately after first login.
