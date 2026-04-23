@@ -4,14 +4,15 @@ The official Docker image for ResourceSpace. Full build instructions can be foun
 
 # Starting ResourseSpace
 
-* Start ResourceSpace with the following command: `source start.sh`
 * ResourceSpace will start on port 8000
+    - ## **Update [config.php](./config.php) with your IP and port for baseurl**
     - To change the port to another value update the 5 following files:
         - [start.sh](./start.sh) for RESOURCESPACE_HOST
         - [docker-compose.yaml](./docker-compose.yaml) under host ports for resourcespace
         - [config.php](./config.php) at baseurl
         - [000-default.conf](./000-default.conf) at \<VirtualHost\>
         - [entrypoint.sh](./entrypoint.sh) around line 38 for EFFECTIVE_BASEURL
+* Start ResourceSpace with the following command: `source start.sh`
 
 # Installation notes
 
