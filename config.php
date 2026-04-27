@@ -14,7 +14,7 @@ $mysql_password = 'rs_test_password';
 $mysql_db = 'resourcespace';
 
 # Base URL of the installation
-$baseurl = 'http://10.172.22.196:8000';
+$baseurl = 'http://10.172.31.11:8000';
 
 # Email settings
 $email_notify = 'test@test.test';

@@ -13,6 +13,9 @@ service cron start
 # Ensure daily cron jobs are executable
 chmod +x /etc/cron.daily/*
 
+# Initialize database and admin user (must happen before setup attempts)
+bash /var/www/html/init.sh
+
 # Ensure base URL is set correctly for browser-facing origin.
 RESOURCESPACE_HOST="${RESOURCESPACE_HOST:-}"
 CONFIG_PATH="/var/www/html/include/config.php"
