@@ -69,8 +69,8 @@ switch ($function) {
         $collection_id = (int) getval("param1", 0);
         $public        = (int) getval("param2", 0);
         ps_query(
-            "UPDATE collection SET public = ? WHERE ref = ?",
-            ["i", $public, "i", $collection_id]
+            "UPDATE collection SET public = ?, type = ? WHERE ref = ?",
+            ["i", $public, "i", ($public ? 4 : 0), "i", $collection_id]
         );
         echo json_encode(true);
         break;
@@ -79,8 +79,8 @@ switch ($function) {
         $collection_id = (int) getval("param1", 0);
         $featured      = (int) getval("param2", 1);
         ps_query(
-            "UPDATE collection SET home_page_publish = ? WHERE ref = ?",
-            ["i", $featured, "i", $collection_id]
+            "UPDATE collection SET home_page_publish = ?, type = ? WHERE ref = ?",
+            ["i", $featured, "i", ($featured ? 3 : 0), "i", $collection_id]
         );
         echo json_encode(true);
         break;
