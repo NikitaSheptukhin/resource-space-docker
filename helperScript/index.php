@@ -75,6 +75,16 @@ switch ($function) {
         echo json_encode(true);
         break;
 
+    case "set_collection_featured":
+        $collection_id = (int) getval("param1", 0);
+        $featured      = (int) getval("param2", 1);
+        ps_query(
+            "UPDATE collection SET featured = ? WHERE ref = ?",
+            ["i", $featured, "i", $collection_id]
+        );
+        echo json_encode(true);
+        break;
+
     case "update_user_group":
         $target_username = getval("param1", "");
         $group_id        = (int) getval("param2", 0);

@@ -39,3 +39,15 @@ def set_collection_public(
         "param1": collection_id,
         "param2": int(public),
     })
+
+
+def set_collection_featured(
+    base_url: str, username: str, private_key: str,
+    collection_id: int, featured: bool = True
+) -> None:
+    """Mark a collection as featured so it appears on the RS homepage."""
+    helper_call(base_url, username, private_key, {
+        "function": "set_collection_featured",
+        "param1": collection_id,
+        "param2": int(featured),
+    })

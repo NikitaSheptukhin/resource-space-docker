@@ -27,15 +27,11 @@ from helper import api_call, helper_call
 # Permission-string helpers
 # ---------------------------------------------------------------------------
 
-# Full CRUD on any resource in the system (admin_faculty)
-ADMIN_FACULTY_PERMISSIONS = "rsedcbz"
-
-# Standard CRUD for faculty — 'z' scopes access to their collection;
-# 'o' limits edit/delete to resources they own (ResourceSpace ≥ 9.x).
-# If your version lacks 'o', remove it; the workflow still works via
-# collection membership and upload tracking.
-FACULTY_PERMISSIONS = "rscz"
-
+# Full CRUD (upload/edit/delete) on any resource inside their collection.
+# r,s grant read/download on ALL resources system-wide (outside the collection);
+# c,e*,d,b are scoped to the collection by `z` — members cannot modify the
+# collection itself (no a/u/g flags) nor edit resources outside it.
+COLLECTION_MEMBER_PERMISSIONS = "r,s,c,e-2,e-1,e0,e1,e3,d,b,f*,j*,z"
 
 def create_user_group(
     base_url: str,
