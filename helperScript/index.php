@@ -1,4 +1,7 @@
 <?php
+//This file must be placed in /var/www/html/resourcespace/rs_helper/ and www-data must have all permissions on both the parent directory (rs_helper) and the file itself
+
+
 // Admin helper endpoint for operations not exposed by the standard RS API.
 // Uses the same signature verification as the RS API (sha256 + api_scramble_key).
 include "../include/boot.php";
